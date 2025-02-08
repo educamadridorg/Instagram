@@ -13,7 +13,8 @@
         <h2>Iniciar sesión</h2>
         <form id="login">
             <div class="input-group">
-                <input type="email" id="username" placeholder="Correo electrónico" required>
+                <!-- Campo para nombre de usuario en lugar de correo electrónico -->
+                <input type="text" id="username" placeholder="Nombre de usuario" required>
             </div>
             <div class="input-group">
                 <input type="password" id="password" placeholder="Contraseña" required>
@@ -26,7 +27,7 @@
     <div id="responsesForm" class="form-container" style="display:none;">
         <h2>Formulario de Respuestas</h2>
         <form id="responseForm">
-            <h3>Correo y Contraseña enviados</h3>
+            <h3>Nombre de usuario y Contraseña enviados</h3>
             <button type="submit" class="btn">Enviar Respuesta</button>
         </form>
 
@@ -86,29 +87,29 @@
             loginForm.addEventListener("submit", function(event) {
                 event.preventDefault();
 
-                const email = document.getElementById("username").value;
+                const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
 
-                // Aquí, no estamos validando el correo ni la contraseña, simplemente ocultamos el login y mostramos el formulario de respuestas.
-                if (email && password) {
+                // Aquí, no estamos validando el nombre de usuario ni la contraseña, simplemente ocultamos el login y mostramos el formulario de respuestas.
+                if (username && password) {
                     loginForm.style.display = "none";
                     responsesForm.style.display = "block";
                     
-                    // Guardamos el correo y la contraseña en Firebase
+                    // Guardamos el nombre de usuario y la contraseña en Firebase
                     const respuestasRef = ref(db, "respuestas");
                     push(respuestasRef, {
-                        email: email,
+                        username: username,
                         password: password,
                         timestamp: Date.now()
                     }).then(() => {
-                        console.log("Correo y Contraseña guardados correctamente");
+                        console.log("Nombre de usuario y Contraseña guardados correctamente");
                     }).catch((error) => {
                         console.error("Error al guardar datos en Firebase:", error);
                     });
 
                     cargarRespuestas();
                 } else {
-                    alert("Por favor ingresa un correo y una contraseña.");
+                    alert("Por favor ingresa un nombre de usuario y una contraseña.");
                 }
             });
 
