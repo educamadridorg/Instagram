@@ -15,7 +15,7 @@ body {
 }
 
 /* Caja de login */
-.login-box {
+.form-container {
     background: white;
     padding: 30px;
     width: 320px;
@@ -33,7 +33,7 @@ body {
 }
 
 /* Campos de entrada */
-input {
+.input-group {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -44,7 +44,7 @@ input {
 }
 
 /* Botón de inicio de sesión */
-button {
+.btn {
     width: 100%;
     padding: 10px;
     background-color: #0095f6;
@@ -57,7 +57,7 @@ button {
     margin-top: 10px;
 }
 
-button:hover {
+.btn:hover {
     background-color: #0078d4;
 }
 
