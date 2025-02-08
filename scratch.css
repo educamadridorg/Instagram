@@ -1,116 +1,124 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background-color: #fafafa;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
+/* Contenedor principal */
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 250);
-    width: 320px;
     text-align: center;
-    position: relative;
-    z-index: 10;
 }
 
-h2 {
-    text-align: center;
+/* Caja de login */
+.login-box {
+    background: white;
+    padding: 30px;
+    width: 320px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo de Instagram */
+.logo {
+    width: 175px;
     margin-bottom: 20px;
 }
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
 
-.input-group label {
-    font-weight: bold;
-    display: block;
-    color: #333;
-}
-
-.input-group input {
+/* Campos de entrada */
+input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin: 5px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
     font-size: 14px;
+    background-color: #fafafa;
 }
 
-/* 🔹 Botón de inicio de sesión */
-.login-btn {
-    background-color: #0056a8;
+/* Botón de inicio de sesión */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0095f6;
     color: white;
     border: none;
-    padding: 10px;
-    width: 100%;
     border-radius: 5px;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 16px;
     font-weight: bold;
-}
-
-.login-btn:hover {
-    background-color: #003d7a;
-}
-
-/* 🔹 Enlace de recuperar contraseña */
-.forgot-password {
-    display: block;
     margin-top: 10px;
-    color: #0056a8;
+}
+
+button:hover {
+    background-color: #0078d4;
+}
+
+/* Línea divisoria con "O" */
+.divider {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #dbdbdb;
+    line-height: 0.1em;
+    margin: 20px 0;
+}
+
+.divider span {
+    background: #fff;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #8e8e8e;
+}
+
+/* Enlace de inicio con Facebook */
+.facebook-login {
+    color: #385185;
+    font-weight: bold;
     text-decoration: none;
     font-size: 14px;
+    margin-top: 10px;
+}
+
+.facebook-login:hover {
+    text-decoration: underline;
+}
+
+/* Enlace "¿Olvidaste tu contraseña?" */
+.forgot-password {
+    color: #00376b;
+    font-size: 12px;
+    margin-top: 10px;
+    text-decoration: none;
 }
 
 .forgot-password:hover {
     text-decoration: underline;
 }
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
+
+/* Caja de registro */
+.register-box {
+    background: white;
+    padding: 15px;
+    width: 320px;
+    border: 1px solid #dbdbdb;
     border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #00189a;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.register-box a {
+    color: #0095f6;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-body {
-    background: url('fondo.jpg') no-repeat center center fixed;
-    background-size: cover;
-    background-position: center  ;
-    background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-button:hover {
-    background-color: #00194c;
-}
-
-#responseContainer {
-    margin-top: 20px;
+.register-box a:hover {
+    text-decoration: underline;
 }
